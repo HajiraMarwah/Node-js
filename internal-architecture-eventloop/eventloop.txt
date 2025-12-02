@@ -1,0 +1,155 @@
+Node.js Internal Architecture – Event Loop & Thread Pool
+
+Introduction
+------------
+Node.js uses a non-blocking, event‑driven architecture. It is built on:
+- V8 JavaScript Engine (executes JS)
+- libuv (handles async operations, thread pool, event loop)
+
+This architecture allows Node.js to handle thousands of requests efficiently.
+
+------------------------------------------------------------
+
+1. How Node.js Works Internally
+===============================
+
+Node.js architecture has 4 main components:
+
+1. **JavaScript Engine (V8)**
+   - Executes JavaScript code.
+   - Only one call stack → single-threaded for JS execution.
+
+2. **Event Loop (libuv)**
+   - Heart of Node.js.
+   - Handles all asynchronous tasks.
+   - Keeps Node.js non-blocking.
+
+3. **Thread Pool (libuv)**
+   - Handles expensive operations:
+     - File system I/O (fs module)
+     - DNS lookups
+     - Compression, encryption
+     - Crypto operations
+   - Default size = 4 threads (can be increased).
+
+4. **Callback Queue / Task Queue**
+   - Stores callbacks waiting for execution.
+   - Event loop pulls tasks from here and runs them.
+
+------------------------------------------------------------
+
+2. Event Loop – Phases
+=======================
+
+The event loop runs in cycles called *ticks*. Each tick processes one phase.
+
+Phases:
+-------
+
+1. **Timers Phase**
+   - Executes callbacks from setTimeout(), setInterval().
+
+2. **Pending Callbacks**
+   - Executes I/O-related callbacks deferred from previous cycles.
+
+3. **Idle / Prepare Phase**
+   - Internal use only.
+
+4. **Poll Phase**
+   - Fetches new I/O events.
+   - Executes most callbacks (file read, network).
+
+5. **Check Phase**
+   - Executes setImmediate() callbacks.
+
+6. **Close Callbacks**
+   - Handles close events (e.g., socket.on('close')).
+
+------------------------------------------------------------
+
+3. Microtasks Queue
+====================
+
+Two important microtask sources:
+- Promise.then() / async await
+- process.nextTick()
+
+Priority:
+1. process.nextTick()
+2. Promise microtasks
+3. Event loop phases
+
+------------------------------------------------------------
+
+4. Thread Pool (libuv)
+=======================
+
+Node.js is single-threaded for JavaScript code, but async operations are NOT.
+
+Thread pool handles:
+- fs.readFile()
+- fs.writeFile()
+- crypto.pbkdf2()
+- zlib compression
+- DNS operations (resolve)
+
+Important:
+- Default pool size = 4
+- Can be changed:
+
+      process.env.UV_THREADPOOL_SIZE = 8;
+
+------------------------------------------------------------
+
+5. Example: How fs.readFile Works Internally
+=============================================
+
+1. JS calls readFile()
+2. Operation is handed to libuv
+3. File reading happens in thread pool
+4. After completion, callback is pushed to event loop queue
+5. Event loop executes the callback
+
+JavaScript never blocks during the file read.
+
+------------------------------------------------------------
+
+6. Example Flow of a Node.js Program
+====================================
+
+    console.log("start");
+
+    setTimeout(() => console.log("timer"), 0);
+
+    fs.readFile("a.txt", () => console.log("file done"));
+
+    console.log("end");
+
+Execution order:
+1. start  → JS stack
+2. end    → JS stack
+3. timer  → Timers phase
+4. file done → Poll phase
+
+------------------------------------------------------------
+
+7. Why Node.js is Fast?
+=======================
+
+- Non-blocking architecture
+- Efficient event loop
+- Thread pool handles heavy tasks
+- Avoids creating new threads per request
+- Lightweight and scalable
+
+------------------------------------------------------------
+
+Summary
+=======
+Node.js is single-threaded for JavaScript but uses:
+- **Event Loop** for async scheduling
+- **Thread Pool** for heavy operations
+- **libuv** to manage OS-level tasks
+
+This combination allows Node.js to handle high concurrency efficiently.
+
