@@ -1,0 +1,53 @@
+npm, package.json, package-lock.json, node_modules – Notes
+
+1. npm
+
+npm (Node Package Manager) is the default package manager for Node.js.
+It is used to install, update, remove, and manage third-party packages.
+
+Common commands: - npm init - npm install package-name - npm uninstall
+package-name - npm update
+
+------------------------------------------------------------------------
+
+2. package.json
+
+package.json stores project information and dependency versions.
+
+Why needed: - Identifies the project - Lists dependencies - Defines
+scripts - Helps others install required packages
+
+Example: { “name”: “my-app”, “version”: “1.0.0”, “scripts”: { “start”:
+“node index.js” }, “dependencies”: { “express”: “^4.19.2” } }
+
+------------------------------------------------------------------------
+
+3. package-lock.json
+
+Locks the exact versions of every installed dependency.
+
+Why needed: - Ensures same versions on all machines - Prevents bugs from
+version changes - Improves npm install performance - Maintains
+reproducible builds
+
+------------------------------------------------------------------------
+
+4. node_modules(source code of 3rd party dependency is kept in this)
+
+Folder where npm installs all downloaded packages.
+
+Notes: - Contains actual installed libraries and their nested
+dependencies - Very large folder - Should NOT be uploaded to GitHub -
+Recreated using: npm install
+
+------------------------------------------------------------------------
+
+Summary Table
+
+| Component             | Purpose                   | Contains              |
+| --------------------- | ------------------------- | --------------------- |
+| **npm**               | Install/manage packages   | CLI tool              |
+| **package.json**      | Project + dependency info | Project metadata      |
+| **package-lock.json** | Locks exact versions      | Dependency tree       |
+| **node_modules**      | Storage of all packages   | Actual installed code |
+

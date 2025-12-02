@@ -1,0 +1,65 @@
+Node.js Modules – Detailed Notes
+
+Types of Modules
+
+1.  Built-in Modules (Out of the box)
+2.  Third-party Modules (Downloaded via npm)
+3.  Custom Modules (Created by you)
+
+------------------------------------------------------------------------
+
+1. Built-in Modules
+
+Built-in modules come with Node.js installation. Examples: - fs - http -
+path - os - events
+
+File System Module (fs)
+
+The fs module is used to interact with the file system.
+
+Example:
+
+    const fs = require("fs");
+    fs.readFile("text.txt", "utf8", (err, data) => {
+      if (err) return console.log(err);
+      console.log(data);
+    });
+
+------------------------------------------------------------------------
+
+2. Third-party Modules (npm)
+
+These are modules downloaded from npm using: npm install module-name
+
+Examples: - express - mongoose - lodash - axios - cors
+
+------------------------------------------------------------------------
+
+3. Custom Modules
+
+Custom modules are your own files.
+
+Example:
+
+In add.js:
+
+    module.exports = function(a, b) {
+      return a + b;
+    }
+
+In main.js:
+
+    const add = require("./add");
+    console.log(add(2, 3));
+
+Why use custom modules?
+  1. To keep code clean and modular.
+  2. To break big logic into smaller pieces.
+  3. To reuse functions in different files.
+
+Summary
+| Type            | Source              | How to Use              | Examples                     |
+| --------------- | ------------------- | ----------------------- | ---------------------------- |
+| **Built-in**    | Provided by Node.js | `require("fs")`         | fs, path, http               |
+| **Third-party** | Install using npm   | `npm install express`   | express, mongoose            |
+| **Custom**      | You create the file | `require("./myModule")` | any function/class you write |

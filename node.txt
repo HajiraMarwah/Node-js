@@ -1,0 +1,30 @@
+Node.js Overview
+
+Definition
+
+Node.js is a JavaScript runtime environment built on Google Chrome’s V8
+engine. It allows developers to execute JavaScript code on the server
+side, outside of a browser.
+
+Why We Use Node.js
+
+-   To build fast, scalable server-side applications.
+-   To use JavaScript on both frontend and backend.
+-   To handle real-time applications like chat, games, and streaming.
+-   To work with event-driven, non-blocking I/O for high performance.
+
+Advantages
+
+-   Fast performance due to the V8 engine.
+-   Non-blocking, asynchronous architecture.
+-   Single programming language across full stack.
+-   Large NPM ecosystem.
+-   Excellent for real-time apps.
+-   Scales easily with microservices.
+
+Disadvantages
+
+-   Not ideal for CPU-intensive tasks.
+-   Callback hell (although improved with Promises & async/await).
+-   Fewer established enterprise tools compared to Java or .NET.
+-   Single-threaded nature can be a limitation for heavy computations.

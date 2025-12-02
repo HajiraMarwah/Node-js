@@ -1,0 +1,135 @@
+Node.js fs Module – Notes and Examples
+
+Why we use node:fs
+------------------
+- fs (File System) is a built‑in Node.js module used for file and directory operations.
+- Using require("node:fs") is the modern recommended syntax.
+- All fs functions are imported into the variable you assign:
+
+      const fs = require("node:fs");
+
+- The variable name can be anything; fs is just a convention.
+
+------------------------------------------------------------
+
+File Operations Using fs Module
+===============================
+
+1. Read File (Synchronous)
+--------------------------
+    const fs = require("node:fs");
+
+    console.log("start");
+
+    const data = fs.readFileSync("test.txt", "utf-8");
+    console.log(data);
+
+    console.log("end");
+
+Output:
+    start
+    <file content>
+    end
+
+------------------------------------------------------------
+
+2. Write File (Synchronous)
+---------------------------
+    // Overwrites the file with new content
+    const contents = fs.writeFileSync("copy.txt", "hey", "utf-8");
+    console.log(contents);
+
+------------------------------------------------------------
+
+3. Append File (Synchronous)
+----------------------------
+    // Adds content at the end of the file
+    const contentAppend = fs.appendFileSync("copy.txt", "\nhey", "utf-8");
+
+------------------------------------------------------------
+
+Asynchronous Versions (Non‑Blocking)
+===================================
+
+4. readFile (Async)
+-------------------
+    const fs = require("node:fs");
+
+    console.log("start");
+
+    fs.readFile("test.txt", "utf-8", (err, data) => {
+      console.log(data);
+    });
+
+    console.log("end");
+
+Output:
+    start
+    end
+    <file content>
+
+------------------------------------------------------------
+
+5. writeFile (Async)
+--------------------
+    // writeFileAsync: Writes to file without blocking the main thread
+    fs.writeFile("copy.txt", "hello async", "utf-8", (err) => {
+      if (err) console.log(err);
+      else console.log("File written asynchronously");
+    });
+
+Why use async version?
+- Non-blocking
+- Better performance
+- Recommended for production apps
+
+------------------------------------------------------------
+
+6. appendFile (Async)
+---------------------
+    // appendFileAsync: Appends data asynchronously
+    fs.appendFile("copy.txt", "\nasync append", "utf-8", (err) => {
+      if (err) console.log(err);
+      else console.log("Content appended asynchronously");
+    });
+
+Notes:
+- Async methods are preferred in servers.
+- Synchronous methods block execution and reduce performance.
+
+------------------------------------------------------------
+
+Directory Operations
+====================
+
+7. Create Directory
+-------------------
+    // Creates a folder named "games"
+    fs.mkdirSync("games");
+
+------------------------------------------------------------
+
+8. Create Nested Directories (Recursive)
+----------------------------------------
+    // Creates games/xyz/a even if parent folders don't exist
+    fs.mkdirSync("games/xyz/a", { recursive: true });
+
+------------------------------------------------------------
+
+9. Remove Directory
+-------------------
+    // Removes directory "a"
+    fs.rmdirSync("games/xyz/a");
+
+------------------------------------------------------------
+
+Summary
+=======
+The fs module supports both synchronous and asynchronous operations:
+
+- Read / Write / Append (sync + async)
+- Create directories
+- Create nested directories
+- Remove directories
+
+Async versions (writeFile, appendFile) do not block execution → recommended for real-world server applications.
