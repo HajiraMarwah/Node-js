@@ -66,6 +66,40 @@ DELETE
 -   Used to remove data.
 -   Example: Delete user or product.
 
+HTTP request headers (GET)
+   They are key–value pairs sent by the client to provide extra information to the server about the request.
+   They help the server understand who is making the request, what format is expected, authorization details, and more.
+   Examples:
+    - Content-Type → type of data sent
+    - Authorization → token or login info
+    - Accept → what response format the client wants
+    - User-Agent → browser/device info
+
+HTTP request Body:
+   The HTTP request body is the actual data sent from the client to the server, usually used in POST, PUT, or PATCH requests.
+
+   Examples of body data:
+     - User details when signing up
+     - Form data
+     - JSON data
+     - File uploads (images, PDFs, etc.)
+    example: {
+            "name": "Hajira",
+            "email": "test@gmail.com"
+          }
+URL-A URL (Uniform Resource Locator) is the address used to access a resource on the internet.
+It tells the browser where to go and what to request.
+   Example:
+         https://www.google.com/contact-us?q=xyz&sort=ascending
+    A URL typically includes:
+      Protocol/Scheme (https)
+      subdomain(www)
+      Domain/IP (google.com)
+      Path (/contact-us)
+      ?-separator
+      Query parameter-q=xyz&sort=ascending(what you are trying to search)
+   
+
 HTTP Status Codes (Response Codes)
 1xx – Informational
 
