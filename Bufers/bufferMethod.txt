@@ -1,0 +1,125 @@
+Commonly Used Buffer Methods in Node.js
+
+1. Buffer.from()
+
+Creates a new buffer from a string, array, or another buffer.
+
+Example:
+
+    Buffer.from("Hello");
+
+------------------------------------------------------------------------
+
+2. Buffer.alloc()
+
+Creates a zero-filled buffer of a specified size.
+
+Example:
+
+    Buffer.alloc(10);
+
+------------------------------------------------------------------------
+
+3. Buffer.allocUnsafe()
+
+Creates a buffer quickly without initializing memory (faster but
+unsafe).
+
+Example:
+
+    Buffer.allocUnsafe(10);
+
+------------------------------------------------------------------------
+
+4. buf.toString()
+
+Converts buffer data into a readable string.
+
+Example:
+
+    buf.toString("utf-8");
+
+------------------------------------------------------------------------
+
+5. buf.length
+
+Returns the size of the buffer (in bytes).
+
+Example:
+
+    buf.length;
+
+------------------------------------------------------------------------
+
+6. buf.write()
+
+Writes a string into a buffer.
+
+Example:
+
+    buf.write("Hello");
+
+------------------------------------------------------------------------
+
+7. buf.slice()
+
+Creates a new buffer referencing a part of the original buffer.
+
+Example:
+
+    buf.slice(0, 4);
+
+------------------------------------------------------------------------
+
+8. Buffer.concat()
+
+Merges multiple buffers into a single buffer.
+
+Example:
+
+    Buffer.concat([buf1, buf2]);
+
+------------------------------------------------------------------------
+
+9. buf.equals()
+
+Checks if two buffers contain the same data.
+
+Example:
+
+    buf1.equals(buf2);
+
+------------------------------------------------------------------------
+
+10. buf.compare()
+
+Compares two buffers lexicographically.
+
+Example:
+
+    buf1.compare(buf2);
+
+------------------------------------------------------------------------
+
+11. buf.copy()
+
+Copies data from one buffer to another.
+
+Example:
+
+    buf1.copy(buf2);
+
+------------------------------------------------------------------------
+
+12. Buffer.isBuffer()
+
+Checks whether a given object is a buffer.
+
+Example:
+
+    Buffer.isBuffer(obj);
+
+------------------------------------------------------------------------
+
+These methods are essential for working with binary data, file streams,
+and low-level operations in Node.js.
