@@ -1,0 +1,139 @@
+Node.js EventEmitter – Full Notes
+
+What is an Event Listener?
+
+An event listener is a function that waits for an event to occur. When
+the specified event is emitted, all listeners attached to that event are
+executed.
+
+What is EventEmitter?
+
+EventEmitter is a core Node.js module (part of ‘events’) used to create,
+handle, and manage events in an asynchronous way.
+
+    const EventEmitter = require("events");
+    const emitter = new EventEmitter();
+
+------------------------------------------------------------------------
+
+Common Methods in EventEmitter
+
+1. on(eventName, listener)
+
+Registers a listener for an event. Runs every time the event is
+triggered.
+
+    emitter.on("greet", (name) => console.log(`Hello ${name}`));
+
+------------------------------------------------------------------------
+
+2. once(eventName, listener)
+
+Registers a listener that runs only once. Automatically removes itself
+after the first emit.
+
+    emitter.once("start", () => console.log("Ran once"));
+
+------------------------------------------------------------------------
+
+3. emit(eventName, …args)
+
+Triggers an event. Executes all listeners attached to that event.
+
+    emitter.emit("greet", "Hajira");
+
+------------------------------------------------------------------------
+
+4. removeListener(eventName, listener)
+
+Removes a specific event listener.
+
+    emitter.removeListener("greet", greetFunction);
+
+------------------------------------------------------------------------
+
+5. removeAllListeners(eventName)
+
+Removes all listeners for a specific event.
+
+    emitter.removeAllListeners("greet");
+
+------------------------------------------------------------------------
+
+6. listeners(eventName)
+
+Returns an array of listener functions attached to the event.
+
+    console.log(emitter.listeners("greet"));
+
+------------------------------------------------------------------------
+
+7. listenerCount(eventName)
+
+Returns number of listeners for an event.
+
+    console.log(emitter.listenerCount("greet"));
+
+------------------------------------------------------------------------
+
+How EventEmitter Works Internally (Flow)
+
+1.  You register listeners using on() or once().
+2.  Node.js stores these listeners internally in an array for each
+    event.
+3.  When you call emit(), Node.js:
+    -   Looks up listeners for that event
+    -   Executes them in order they were registered
+4.  For once(), the listener is removed immediately after it runs.
+
+------------------------------------------------------------------------
+
+Example Diagram (Text Format)
+
+Event Registration:
+
+    eventEmitter.on("login", handler1)
+    eventEmitter.on("login", handler2)
+
+    Internal Structure:
+    login → [handler1, handler2]
+
+After emit("login"):
+
+    handler1 runs
+    handler2 runs
+
+For once():
+
+    loginOnce → [onceHandler]
+    emit("loginOnce") → runs and removed
+    loginOnce → []
+
+------------------------------------------------------------------------
+
+Why EventEmitter is Important
+
+-   Helps in asynchronous programming
+-   Avoids callback hell
+-   Enables event-driven architecture
+-   Used in HTTP servers, streams, file operations, etc.
+
+------------------------------------------------------------------------
+
+Real-World Uses
+
+-   Server request handling
+-   Listening for file uploads
+-   Streams reading/writing
+-   WebSocket events
+-   Timers and interval triggers
+
+------------------------------------------------------------------------
+
+Summary
+
+EventEmitter enables: - Creating custom events - Attaching multiple
+listeners - Removing listeners - Triggering events manually - Executing
+one-time listeners
+
+It is the backbone for event-driven Node.js applications.
