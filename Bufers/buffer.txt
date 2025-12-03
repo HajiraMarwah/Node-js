@@ -1,0 +1,18 @@
+What is Buffering in nodejs
+  1. Buffer is a temporary storage area for binary data
+  2.Node js doesnt not support  direct binary manipulation like c/c++ so buffer  provides a way to work directly with byte
+  3. used mostly in file streams,network data and binary protocols
+
+why do we need Buffers
+  1. JavaScript string are utf-16 encoded making direct binary data handling inefficient
+  2. Buffer store this binary data outside v8's heaap
+  3.Useful when working with 
+      - File systems(fs module)
+      - Networking(TCP,UDP,WebSocket)
+      - Streams(handling chunks of data)
+
+
+Example
+
+    const buffer = Buffer.from("Hello");
+    console.log(buffer); // <Buffer 48 65 6c 6c 6f>
