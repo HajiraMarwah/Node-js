@@ -1,0 +1,117 @@
+HTTP-hyper text transfer protocol for transfering infromation on internet
+when we talk about api or interbet or serer
+when client(machine,mobile,laptop) 
+server(it can be machine connectd to internet having public ip address,public facing ip ,aws,azure,goggle server or can be bare metal(server that is present in our home or office))
+its 27/7 ouptime has public facing ip static ip assume it has ip address of 10.24.1.2
+
+this client send request(create,upload or anything) to server and server is responsible for processing this request(like get,post delete the data) at this paoint as part of proceessing first of all you have to authenticate(if particular user allowed to access),authorization
+(access that particular resouce,authority like validation check) and finally process this processing can be database opeartion
+your server can be connected to database(postgres,mongodb or mysql) and its do some read and write operatio in database
+
+and once ths server has done ots work it going return response means at end its request and response this is known as request-response cycle
+
+
+What is HTTP?
+-   HTTP stands for HyperText Transfer Protocol.
+-   It is the primary protocol used for transferring information on the
+    internet.
+-   Works on a request–response model.
+
+Client
+-   Can be any device sending a request: mobile, laptop, machine,
+    browser.
+
+Server
+-   A computer connected to the internet with a public-facing IP
+    address.
+-   Can be hosted on AWS, Azure, Google Cloud, on-prem bare-metal, etc.
+-   Example public IP: 10.24.1.2.
+-   Always running (24/7 uptime).
+
+What Happens When a Client Sends a Request?
+
+1.  Request reaches server (GET/POST/DELETE etc.).
+2.  Server performs:
+    -   Authentication (Is the user allowed?)
+    -   Authorization (What resource can they access?)
+    -   Validation of data.
+3.  Server processes the operation:
+    -   Read/write means server  connected to database  (MySQL, PostgreSQL, MongoDB) do some operations 
+4.  Server sends back a response to client.
+
+Request–Response Cycle
+-   Client → sends a request
+-   Server → processes
+-   Server → sends response
+-   This loop is called Request–Response Cycle.
+
+HTTP Methods-Requests which client sends
+GET
+-   Used to retrieve data.
+-   Example: Fetch user profile, product list.
+
+POST
+-   Used to create new data.
+-   Example: Create user, submit form.
+
+PUT
+-   Used to update existing data completely.
+-   Example: Replace the entire user object.
+
+PATCH
+-   Used to partially update data.
+-   Example: Only update user email.
+
+DELETE
+-   Used to remove data.
+-   Example: Delete user or product.
+
+HTTP Status Codes (Response Codes)
+1xx – Informational
+
+-   100 Continue – Request is OK, continue sending body.
+-   101 Switching Protocols – Server is switching protocols.
+-   102 Processing – Server is processing the request.
+
+------------------------------------------------------------------------
+
+2xx – Success
+
+-   200 OK – Request successful.
+-   201 Created – New resource created.
+-   202 Accepted – Request accepted but not yet processed.
+-   204 No Content – Request successful, no response body.
+
+------------------------------------------------------------------------
+
+3xx – Redirection
+
+-   301 Moved Permanently – Resource moved to a new URL.
+-   302 Found – Temporary redirect.
+-   304 Not Modified – Cached version can be used.
+
+------------------------------------------------------------------------
+
+4xx – Client Errors
+
+-   400 Bad Request – Invalid request format.
+-   401 Unauthorized – Authentication required.
+-   403 Forbidden – You are not allowed to access.
+-   404 Not Found – Resource not found.
+-   409 Conflict – Request conflicts with server state.
+
+------------------------------------------------------------------------
+
+5xx – Server Errors
+
+-   500 Internal Server Error – Server crashed or error occurred.
+-   501 Not Implemented – Server doesn’t support the operation.
+-   502 Bad Gateway – Server received invalid response from another
+    server.
+-   503 Service Unavailable – Server is down or overloaded.
+-   504 Gateway Timeout – Server took too long to respond.
+
+------------------------------------------------------------------------
+
+These status codes help understand what happened with a request in the
+request–response cycle.
