@@ -1,0 +1,54 @@
+SemVer (Semantic Versioning)
+
+Semantic Versioning (SemVer) is a versioning system used to manage and
+communicate changes in software. It follows the format:
+
+MAJOR.MINOR.PATCH
+
+1. MAJOR Version
+
+-   Increases when there are incompatible api changes or breaking changes are introduced.
+-   means old code will stop working
+-   Example: 1.0.0 → 2.0.0
+
+2. MINOR Version
+
+-   Increases when new features are added but in backward‑compatible way(nothing will break).
+-   Example: 1.2.0 → 1.3.0
+
+3. PATCH Version
+
+-   Increases when bug fixes or small improvements** are released in backward‑compatible way.
+-   Example: 1.2.3 → 1.2.4
+
+Summary
+
+-   MAJOR = Breaking changes
+-   MINOR = New backward‑compatible features
+-   PATCH = Bug fixes / small updates
+
+Version Symbols in package.json
+
+1. ^ (Caret)
+
+Allows updates to MINOR and PATCH versions, but not MAJOR versions.
+
+It allows:
+   Patch update: 4.17.1 → 4.17.2
+   Minor update: 4.17.1 → 4.18.0
+
+2. ~ (Tilde)
+
+Allows updates to PATCH only.
+Does not allow MINOR or MAJOR updates.
+Examples:
+  - Patch update → 1.4.2 → 1.4.3
+  - No minor update → Not allowed: 1.4.x → 1.5.0
+  - No major update → Not allowed: 1.x.x → 2.0.0
+
+Summary
+| Symbol    | Allows Update | Blocks Update |
+| --------- | ------------- | ------------- |
+| `^`       | Minor + Patch | Major         |
+| `~`       | Patch only    | Minor + Major |
+| No symbol | Exact version | All updates   |
